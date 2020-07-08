@@ -8,6 +8,8 @@ import {
   JoinColumn,
 } from 'typeorm';
 
+import Category from './Category';
+
 @Entity('Transaction')
 class Transaction {
   @PrimaryGeneratedColumn('uuid')
@@ -19,10 +21,11 @@ class Transaction {
   @Column()
   type: 'income' | 'outcome';
 
-  @Column()
+  @Column('decimal')
   value: number;
 
-  @Column()
+  @ManyToOne(() => Category)
+  @JoinColumn({ name: 'category_id' })
   category_id: string;
 
   @CreateDateColumn()
