@@ -1,7 +1,7 @@
 import {
   Entity,
-  Column,
   PrimaryGeneratedColumn,
+  Column,
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
@@ -10,7 +10,7 @@ import {
 
 import Category from './Category';
 
-@Entity('Transaction')
+@Entity('transactions')
 class Transaction {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -21,12 +21,15 @@ class Transaction {
   @Column()
   type: 'income' | 'outcome';
 
-  @Column('decimal')
+  @Column()
   value: number;
+
+  @Column()
+  category_id: string;
 
   @ManyToOne(() => Category)
   @JoinColumn({ name: 'category_id' })
-  category_id: string;
+  category: string;
 
   @CreateDateColumn()
   created_at: Date;
